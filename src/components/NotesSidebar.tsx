@@ -57,7 +57,7 @@ export const NotesSidebar = ({
       {/* Header */}
       <div className="p-4 border-b border-sidebar-border">
         <div className="flex items-center justify-between mb-4">
-          <h1 className="font-serif text-xl text-foreground">Clarity</h1>
+          <h1 className="font-serif text-xl text-foreground">Muse</h1>
           <div className="flex items-center gap-1">
             <ThemeToggle />
             <Button

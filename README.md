@@ -1,3 +1,8 @@
+
+
+
+
+
 # Mindful Muse 🧠📝
 *A calm, modern note-taking experience for focused thinking.*
 
@@ -11,9 +16,12 @@ This project demonstrates real-world frontend architecture, secure backend integ
 
 A distraction-free workspace with tag-based notes, live markdown editing, and a soft, mindful interface.
 
-> Screenshot showcasing the main editor, sidebar with tagged notes, and preview toggle.
 
----
+
+<p align="center">
+  <img src="public/preview2.png" width="100%" />
+</p>
+
 
 ## ✨ Core Features
 
@@ -36,6 +44,11 @@ A distraction-free workspace with tag-based notes, live markdown editing, and a 
 - Persistent user sessions
 - Protected routes for authenticated users
 - Secure logout
+
+<p align="center">
+  <img src="public/preview1.png" width="100%" />
+</p>
+
 
 ### 🎨 Interface & UX
 - Calm, minimal design system

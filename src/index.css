@@ -1,0 +1,319 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Warm, subtle palette */
+    --background: 40 20% 98%;
+    --foreground: 30 10% 15%;
+
+    --card: 40 25% 97%;
+    --card-foreground: 30 10% 15%;
+
+    --popover: 40 20% 98%;
+    --popover-foreground: 30 10% 15%;
+
+    /* Muted sage green accent */
+    --primary: 150 25% 45%;
+    --primary-foreground: 40 20% 98%;
+
+    --secondary: 40 15% 94%;
+    --secondary-foreground: 30 10% 25%;
+
+    --muted: 40 12% 92%;
+    --muted-foreground: 30 8% 50%;
+
+    --accent: 150 20% 92%;
+    --accent-foreground: 150 25% 35%;
+
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 40 20% 98%;
+
+    --border: 40 15% 88%;
+    --input: 40 15% 90%;
+    --ring: 150 25% 45%;
+
+    --radius: 0.75rem;
+
+    /* Tag colors */
+    --tag-work: 220 70% 50%;
+    --tag-personal: 280 60% 55%;
+    --tag-ideas: 45 90% 50%;
+    --tag-todo: 150 60% 40%;
+
+    /* Custom design tokens */
+    --shadow-soft: 0 2px 20px -4px hsl(30 10% 15% / 0.08);
+    --shadow-elevated: 0 8px 40px -8px hsl(30 10% 15% / 0.12);
+    --shadow-glow: 0 0 40px hsl(150 25% 45% / 0.15);
+
+    --gradient-subtle: linear-gradient(135deg, hsl(40 25% 97%) 0%, hsl(40 20% 95%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(150 25% 45%) 0%, hsl(155 30% 50%) 100%);
+
+    --sidebar-background: 40 18% 96%;
+    --sidebar-foreground: 30 10% 25%;
+    --sidebar-primary: 150 25% 45%;
+    --sidebar-primary-foreground: 40 20% 98%;
+    --sidebar-accent: 150 20% 92%;
+    --sidebar-accent-foreground: 150 25% 35%;
+    --sidebar-border: 40 15% 90%;
+    --sidebar-ring: 150 25% 45%;
+  }
+
+  .dark {
+    /* Deep, rich dark palette with warmth */
+    --background: 220 20% 6%;
+    --foreground: 40 15% 92%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 40 15% 92%;
+
+    --popover: 220 20% 8%;
+    --popover-foreground: 40 15% 92%;
+
+    /* Luminous sage accent for dark mode */
+    --primary: 155 45% 55%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 40 15% 85%;
+
+    --muted: 220 15% 14%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 155 30% 15%;
+    --accent-foreground: 155 45% 65%;
+
+    --destructive: 0 55% 50%;
+    --destructive-foreground: 40 15% 92%;
+
+    --border: 220 15% 16%;
+    --input: 220 15% 18%;
+    --ring: 155 45% 55%;
+
+    /* Tag colors - brighter for dark mode */
+    --tag-work: 220 80% 65%;
+    --tag-personal: 280 70% 70%;
+    --tag-ideas: 45 100% 60%;
+    --tag-todo: 155 70% 55%;
+
+    /* Enhanced dark mode shadows with glow */
+    --shadow-soft: 0 2px 20px -4px hsl(0 0% 0% / 0.4);
+    --shadow-elevated: 0 8px 40px -8px hsl(0 0% 0% / 0.5), 0 0 1px hsl(155 45% 55% / 0.1);
+    --shadow-glow: 0 0 60px hsl(155 45% 55% / 0.25), 0 0 20px hsl(155 45% 55% / 0.15);
+
+    --sidebar-background: 220 18% 8%;
+    --sidebar-foreground: 40 15% 85%;
+    --sidebar-primary: 155 45% 55%;
+    --sidebar-primary-foreground: 220 20% 6%;
+    --sidebar-accent: 155 25% 12%;
+    --sidebar-accent-foreground: 155 45% 65%;
+    --sidebar-border: 220 15% 14%;
+    --sidebar-ring: 155 45% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Instrument Serif', Georgia, serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .glass-card-elevated {
+    @apply bg-card/90 backdrop-blur-xl border border-border/40;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .ai-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Tag variants */
+  .tag-work {
+    @apply bg-[hsl(var(--tag-work)/0.15)] text-[hsl(var(--tag-work))] border-[hsl(var(--tag-work)/0.3)];
+  }
+
+  .tag-personal {
+    @apply bg-[hsl(var(--tag-personal)/0.15)] text-[hsl(var(--tag-personal))] border-[hsl(var(--tag-personal)/0.3)];
+  }
+
+  .tag-ideas {
+    @apply bg-[hsl(var(--tag-ideas)/0.15)] text-[hsl(var(--tag-ideas))] border-[hsl(var(--tag-ideas)/0.3)];
+  }
+
+  .tag-todo {
+    @apply bg-[hsl(var(--tag-todo)/0.15)] text-[hsl(var(--tag-todo))] border-[hsl(var(--tag-todo)/0.3)];
+  }
+
+  /* Dark mode glow effects */
+  .dark .glow-border {
+    position: relative;
+  }
+
+  .dark .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(155 45% 55% / 0.3), transparent 50%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Markdown styling */
+  .markdown-content {
+    @apply text-foreground leading-relaxed;
+  }
+
+  .markdown-content h1 {
+    @apply font-serif text-2xl font-normal mt-6 mb-3 text-foreground;
+  }
+
+  .markdown-content h2 {
+    @apply font-serif text-xl font-normal mt-5 mb-2 text-foreground;
+  }
+
+  .markdown-content h3 {
+    @apply font-serif text-lg font-normal mt-4 mb-2 text-foreground;
+  }
+
+  .markdown-content p {
+    @apply mb-3;
+  }
+
+  .markdown-content strong {
+    @apply font-semibold text-foreground;
+  }
+
+  .markdown-content em {
+    @apply italic;
+  }
+
+  .markdown-content ul {
+    @apply list-disc list-inside mb-3 space-y-1;
+  }
+
+  .markdown-content ol {
+    @apply list-decimal list-inside mb-3 space-y-1;
+  }
+
+  .markdown-content li {
+    @apply text-foreground/90;
+  }
+
+  .markdown-content code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-accent-foreground;
+  }
+
+  .markdown-content pre {
+    @apply bg-muted p-4 rounded-lg mb-3 overflow-x-auto;
+  }
+
+  .markdown-content pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .markdown-content blockquote {
+    @apply border-l-2 border-primary/50 pl-4 italic text-muted-foreground mb-3;
+  }
+
+  .markdown-content a {
+    @apply text-primary underline underline-offset-2 hover:text-primary/80;
+  }
+
+  .markdown-content hr {
+    @apply border-border my-6;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.5s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(-16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(155 45% 55% / 0.2);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(155 45% 55% / 0.4);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+}

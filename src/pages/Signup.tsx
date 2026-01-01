@@ -13,6 +13,7 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const { signUp } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -50,11 +51,10 @@ export default function Signup() {
       });
       setIsLoading(false);
     } else {
-      toast({
-        title: 'Account created!',
-        description: 'Please check your email to verify your account.',
-      });
-      navigate('/login');
+      // Store email in localStorage to show verification dialog
+      localStorage.setItem('pending_email_verification', email);
+      setIsSuccess(true);
+      // Removed navigate('/login') - showing success state inline instead
     }
   };
 
@@ -84,71 +84,99 @@ export default function Signup() {
             </p>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={isLoading}
-                className="bg-background/50"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled={isLoading}
-                className="bg-background/50"
-              />
-              <p className="text-xs text-muted-foreground">
-                Must be at least 6 characters
+          {/* Success State */}
+          {isSuccess ? (
+            <div className="text-center py-8">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6"
+              >
+                <Sparkles className="h-8 w-8 text-green-600" />
+              </motion.div>
+              <h2 className="text-2xl font-serif mb-4">Check your email</h2>
+              <p className="text-muted-foreground mb-8">
+                We've sent a verification link to <br />
+                <span className="font-semibold text-foreground">{email}</span>
               </p>
+              <div className="p-4 bg-muted/30 rounded-lg text-sm text-muted-foreground mb-6">
+                <p>Click the link in the email to verify your account and sign in.</p>
+              </div>
+              <Button
+                variant="outline"
+                onClick={() => navigate('/login')}
+                className="w-full"
+              >
+                Go to Login
+              </Button>
             </div>
+          ) : (
+            /* Form */
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={isLoading}
+                  className="bg-background/50"
+                />
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                placeholder="••••••••"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  disabled={isLoading}
+                  className="bg-background/50"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Must be at least 6 characters
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="••••••••"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  disabled={isLoading}
+                  className="bg-background/50"
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full"
                 disabled={isLoading}
-                className="bg-background/50"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  Creating account...
-                </>
-              ) : (
-                <>
-                  <UserPlus className="h-4 w-4 mr-2" />
-                  Sign Up
-                </>
-              )}
-            </Button>
-          </form>
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    Creating account...
+                  </>
+                ) : (
+                  <>
+                    <UserPlus className="h-4 w-4 mr-2" />
+                    Sign Up
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
 
           {/* Footer */}
           <div className="mt-6 text-center text-sm text-muted-foreground">

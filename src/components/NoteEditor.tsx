@@ -90,9 +90,9 @@ export const NoteEditor = ({ note, onUpdateNote, onToggleTag }: NoteEditorProps)
       <motion.header
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between p-4 border-b border-border/50"
+        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 border-b border-border/50"
       >
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <input
             type="text"
             value={localTitle}
@@ -101,11 +101,11 @@ export const NoteEditor = ({ note, onUpdateNote, onToggleTag }: NoteEditorProps)
               setLocalTitle(newTitle);
               debouncedSave(note.id, { title: newTitle });
             }}
-            placeholder="Untitled"
+            placeholder="Note"
             className="w-full bg-transparent font-serif text-2xl text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
           />
-          <div className="flex items-center gap-3 mt-2">
-            <p className="text-xs text-muted-foreground">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mt-2">
+            <p className="text-xs text-muted-foreground whitespace-nowrap">
               Last edited {note.updatedAt.toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
@@ -113,7 +113,7 @@ export const NoteEditor = ({ note, onUpdateNote, onToggleTag }: NoteEditorProps)
                 minute: '2-digit',
               })}
             </p>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 flex-wrap min-w-0">
               {note.tags.map((tag) => (
                 <TagBadge key={tag} tag={tag} size="sm" />
               ))}
@@ -121,7 +121,7 @@ export const NoteEditor = ({ note, onUpdateNote, onToggleTag }: NoteEditorProps)
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <TagSelector
             selectedTags={note.tags}
             onToggleTag={(tag) => onToggleTag(note.id, tag)}
@@ -137,12 +137,12 @@ export const NoteEditor = ({ note, onUpdateNote, onToggleTag }: NoteEditorProps)
             {isPreviewMode ? (
               <>
                 <Edit3 className="h-3.5 w-3.5" />
-                <span className="text-xs">Edit</span>
+                <span className="text-xs hidden sm:inline">Edit</span>
               </>
             ) : (
               <>
                 <Eye className="h-3.5 w-3.5" />
-                <span className="text-xs">Preview</span>
+                <span className="text-xs hidden sm:inline">Preview</span>
               </>
             )}
           </Button>

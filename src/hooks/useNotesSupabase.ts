@@ -65,7 +65,7 @@ export const useNotes = () => {
 
       const newNote = {
         user_id: user.id,
-        title: 'Untitled Note',
+        title: '',
         content: '',
         tags: [],
       };

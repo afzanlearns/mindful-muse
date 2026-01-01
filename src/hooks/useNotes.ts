@@ -72,7 +72,7 @@ export const useNotes = () => {
   const createNote = useCallback(() => {
     const newNote: Note = {
       id: generateId(),
-      title: 'Untitled Note',
+      title: '',
       content: '',
       tags: [],
       createdAt: new Date(),

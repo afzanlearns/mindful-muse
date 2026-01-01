@@ -50,11 +50,22 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, redirectTo?: string) => {
+    const redirectUrl = redirectTo || `${window.location.origin}/auth/callback`;
+    console.log("🔵 Attempting sign up with redirect URL:", redirectUrl);
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: redirectUrl,
+      },
     });
+
+    if (error) {
+      console.error("🔴 Sign up error details:", error);
+    }
+
     return { error };
   };
 

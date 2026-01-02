@@ -101,7 +101,7 @@ export const NoteEditor = ({ note, onUpdateNote, onToggleTag }: NoteEditorProps)
               setLocalTitle(newTitle);
               debouncedSave(note.id, { title: newTitle });
             }}
-            placeholder="Note"
+            placeholder="Untitled Note"
             className="w-full bg-transparent font-serif text-2xl text-foreground placeholder:text-muted-foreground/50 focus:outline-none"
           />
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mt-2">

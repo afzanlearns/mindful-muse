@@ -129,7 +129,7 @@ export const NotesSidebar = ({
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
                       <h3 className="font-medium text-sm truncate mb-1">
-                        {note.title || 'Note'}
+                        {note.title || 'Untitled Note'}
                       </h3>
                       <p className="text-xs text-muted-foreground line-clamp-2 mb-1">
                         {note.content.replace(/[#*`_\[\]]/g, '').slice(0, 80) || 'No content yet...'}
